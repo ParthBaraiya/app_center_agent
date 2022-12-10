@@ -10,25 +10,25 @@ class NetworkStore = _NetworkStore with _$NetworkStore;
 
 abstract class _NetworkStore with Store {
   @observable
-  NetworkState networkState = NetworkState.idle;
+  NetworkState state = NetworkState.idle;
 
   @observable
-  String? networkError;
+  String? error;
 
   Future<void> networkCall(AsyncCallback callback) async {
-    if (networkState.isLoading) return;
+    if (state.isLoading) return;
 
-    networkState = NetworkState.loading;
+    state = NetworkState.loading;
 
     try {
       await callback();
-      networkState = NetworkState.success;
+      state = NetworkState.success;
     } on String catch (e) {
-      networkError = e;
-      networkState = NetworkState.error;
+      error = e;
+      state = NetworkState.error;
     } catch (e) {
-      networkError = AppStrings.somethingWentWrong;
-      networkState = NetworkState.error;
+      error = AppStrings.somethingWentWrong;
+      state = NetworkState.error;
     }
   }
 }

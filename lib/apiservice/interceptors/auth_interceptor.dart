@@ -3,17 +3,17 @@ part of 'interceptors.dart';
 class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    if (UserAccountListStore.instance.currentUser == null) {
-      handler.reject(DioError(
+    if (AppConfigs.users.currentUser == null) {
+      handler.reject(DioException(
         requestOptions: options,
         response: Response(
           requestOptions: options,
           statusCode: 401,
           statusMessage: 'No user selected.',
           data: {
-            "error": {
-              "code": "Unauthorized Access",
-              "message": "No user selected."
+            'error': {
+              'code': 'Unauthorized Access',
+              'message': 'No user selected.'
             }
           },
         ),
@@ -22,7 +22,7 @@ class AuthInterceptor extends Interceptor {
 
     if (!options.headers.containsKey(kAuthHeaderKey)) {
       options.headers.addAll({
-        kAuthHeaderKey: UserAccountListStore.instance.currentUser!.token,
+        kAuthHeaderKey: AppConfigs.users.currentUser!.token,
       });
     }
 

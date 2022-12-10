@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class DefaultIconButton extends StatelessWidget {
   const DefaultIconButton({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.icon,
     this.size,
-  }) : super(key: key);
+  });
 
   final VoidCallback onTap;
   final IconData icon;

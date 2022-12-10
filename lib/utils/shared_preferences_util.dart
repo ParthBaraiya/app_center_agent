@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:app_center_agent/stores/user_store.dart';
+import 'package:app_center_agent/models/user.dart';
+import 'package:app_center_agent/stores/user/user_store.dart';
 import 'package:app_center_agent/values/app_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,7 +34,7 @@ class SharedPreferencesUtility {
   static Future<Map<String, UserStore>> getStoredUsers() async {
     final sp = await SharedPreferences.getInstance();
     final tokens = sp.getStringList(SharedPreferencesKeys.tokens) ?? [];
-    debugPrint("${tokens.length} users found...");
+    debugPrint('${tokens.length} users found...');
     final users = <String, UserStore>{};
     for (final token in tokens) {
       try {

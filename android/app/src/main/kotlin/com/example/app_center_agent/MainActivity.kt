@@ -1,4 +1,4 @@
-package com.example.app_center_agent
+package com.binate.appcenteragent
 
 import io.flutter.embedding.android.FlutterActivity
 

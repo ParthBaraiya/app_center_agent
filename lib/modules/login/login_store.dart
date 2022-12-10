@@ -1,4 +1,4 @@
-import 'package:app_center_agent/stores/user_account_list_store.dart';
+import 'package:app_center_agent/app_configs.dart';
 import 'package:app_center_agent/utils/extension.dart';
 import 'package:app_center_agent/utils/navigation/routing_configurations.dart';
 import 'package:app_center_agent/values/app_strings.dart';
@@ -19,6 +19,8 @@ abstract class _LoginStore with Store {
   final BuildContext buildContext;
 
   final formKey = GlobalKey<FormState>();
+  final controller =
+      TextEditingController(text: '824ed7c91d77a75ca579980241980630c2f20a2a');
   String _token = '';
 
   Future<void> submit() async {
@@ -34,8 +36,8 @@ abstract class _LoginStore with Store {
       );
 
       try {
-        UserAccountListStore.instance.addUserByToken(_token);
-        buildContext.goNamed(RouteData.home.name);
+        AppConfigs.users.addUserByToken(_token);
+        buildContext.goNamed(AppRouteData.home.name);
         controller.close();
       } catch (e) {
         buildContext.showSnackBar(message: AppStrings.somethingWentWrong);

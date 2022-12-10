@@ -1,8 +1,8 @@
 enum UserPermission {
-  manager(mappingString: "manager"),
-  developer(mappingString: "developer"),
-  viewer(mappingString: "viewer"),
-  tester(mappingString: "tester");
+  manager(mappingString: 'manager'),
+  developer(mappingString: 'developer'),
+  viewer(mappingString: 'viewer'),
+  tester(mappingString: 'tester');
 
   final String mappingString;
 
@@ -10,13 +10,18 @@ enum UserPermission {
 }
 
 enum CreationOrigin {
-  appCenter(mappingString: 'appcenter'),
-  hockeyApp(mappingString: 'hockeyapp'),
-  codePush(mappingString: 'codepush');
+  appCenter('appcenter', 'App Center'),
+  hockeyApp('hockeyapp', 'Hockey App'),
+  codePush('codepush', 'Code Push'),
+  none('', 'None');
 
   final String mappingString;
+  final String display;
 
-  const CreationOrigin({required this.mappingString});
+  const CreationOrigin(
+    this.mappingString,
+    this.display,
+  );
 }
 
 enum NetworkState {
@@ -37,14 +42,14 @@ extension StringToEnumExtension on String {
       if (origin.mappingString == this) return origin;
     }
 
-    throw StateError('Invalid string');
+    return CreationOrigin.none;
   }
 
-  UserPermission get toUserPermission {
+  UserPermission? get toUserPermission {
     for (final permission in UserPermission.values) {
       if (permission.mappingString == this) return permission;
     }
 
-    throw StateError('Invalid string');
+    return null;
   }
 }
