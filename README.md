@@ -1,5 +1,7 @@
 # app_center_agent
 
+NOTE: This repository has been archived as AppCenter is discontinued
+
 A new Flutter project.
 
 ## Getting Started
